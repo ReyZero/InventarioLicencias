@@ -262,7 +262,7 @@ async def delete_equipment(equipment_id: str, current_user: dict = Depends(get_c
 @api_router.get("/support", response_model=List[SupportHistory])
 async def get_support_history(numero_serie: Optional[str] = None, current_user: dict = Depends(get_current_user)):
     query = {"numero_serie": numero_serie} if numero_serie else {}
-    support_list = await db.support_history.find(query, {"_id": 0}).to_list(1000)
+    support_list = await db.support_history.find(query, {"_id": 0}).to_list(10000)
     return support_list
 
 @api_router.post("/support", response_model=SupportHistory)
