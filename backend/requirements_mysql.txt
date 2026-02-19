@@ -1,0 +1,11 @@
+# Requirements para versión MySQL
+fastapi==0.110.1
+uvicorn==0.25.0
+python-dotenv>=1.0.1
+sqlalchemy>=2.0.0
+pymysql>=1.1.0
+cryptography>=42.0.8
+xlsxwriter>=3.2.0
+
+# Para PostgreSQL en lugar de MySQL, reemplaza pymysql por:
+# psycopg2-binary>=2.9.9
