@@ -275,15 +275,26 @@ export const LicenseTable = ({ licenses, onDelete, onEdit }) => {
                       </Badge>
                     </TableCell>
                     <TableCell className="p-4">
-                      <Button
-                        data-testid={`delete-license-btn-${item.codigo_licencia}`}
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setDeleteId(item.id)}
-                        className="hover:bg-destructive/10 hover:text-destructive"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button
+                          data-testid={`edit-license-btn-${item.codigo_licencia}`}
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => onEdit(item)}
+                          className="hover:bg-primary/10 hover:text-primary"
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          data-testid={`delete-license-btn-${item.codigo_licencia}`}
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setDeleteId(item.id)}
+                          className="hover:bg-destructive/10 hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))
