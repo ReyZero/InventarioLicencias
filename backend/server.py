@@ -66,6 +66,7 @@ class Equipment(BaseModel):
     fecha_entrega: str  # DD/MM/AAAA
     jefatura: str
     usuario_final: str
+    area_usuario: str
     estado: str  # Activo / En reparación / Dado de baja
 
 class EquipmentCreate(BaseModel):
@@ -74,6 +75,7 @@ class EquipmentCreate(BaseModel):
     fecha_entrega: str
     jefatura: str
     usuario_final: str
+    area_usuario: str
     estado: str
 
 class SupportHistory(BaseModel):
