@@ -174,7 +174,7 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-border rounded-lg overflow-hidden">
+      <div className="bg-card border border-border rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
