@@ -357,6 +357,15 @@ function App() {
         onOpenChange={setIsAddLicenseOpen}
         onSubmit={handleAddLicense}
       />
+      <EditLicenseModal
+        open={isEditLicenseOpen}
+        onOpenChange={(open) => {
+          setIsEditLicenseOpen(open);
+          if (!open) setSelectedLicense(null);
+        }}
+        onSubmit={handleUpdateLicense}
+        license={selectedLicense}
+      />
 
       <Toaster position="top-right" />
     </div>
