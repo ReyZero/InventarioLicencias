@@ -143,6 +143,18 @@ export const AddEquipmentModal = ({ open, onOpenChange, onSubmit }) => {
               />
             </div>
             <div className="grid gap-2">
+              <Label htmlFor="area_usuario">Área Usuario *</Label>
+              <Input
+                data-testid="equipment-area-input"
+                id="area_usuario"
+                placeholder="Ej: Administración"
+                value={formData.area_usuario}
+                onChange={(e) =>
+                  setFormData({ ...formData, area_usuario: e.target.value })
+                }
+              />
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="estado">Estado *</Label>
               <Select
                 value={formData.estado}
