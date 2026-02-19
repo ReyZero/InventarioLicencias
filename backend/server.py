@@ -93,6 +93,26 @@ class SupportHistoryCreate(BaseModel):
     estado_garantia: str
     resultado: str
 
+class License(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str
+    nombre_licencia: str
+    codigo_licencia: str
+    estado: str  # Disponible / Reasignada / Instalada
+    usuario_final: Optional[str] = None
+    area_usuario: Optional[str] = None
+    vigencia: str  # DD/MM/AAAA
+    dias_restantes: Optional[int] = None
+
+class LicenseCreate(BaseModel):
+    nombre_licencia: str
+    codigo_licencia: str
+    estado: str
+    usuario_final: Optional[str] = None
+    area_usuario: Optional[str] = None
+    vigencia: str
+
 # Helper functions
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
