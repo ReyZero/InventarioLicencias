@@ -160,6 +160,27 @@ function App() {
     }
   };
 
+  const handleAddLicense = async (data) => {
+    try {
+      await axios.post(`${API}/licenses`, data);
+      toast.success("Licencia agregada correctamente");
+      fetchData();
+      setIsAddLicenseOpen(false);
+    } catch (e) {
+      toast.error(e.response?.data?.detail || "Error al agregar licencia");
+    }
+  };
+
+  const handleDeleteLicense = async (id) => {
+    try {
+      await axios.delete(`${API}/licenses/${id}`);
+      toast.success("Licencia eliminada correctamente");
+      fetchData();
+    } catch (e) {
+      toast.error("Error al eliminar licencia");
+    }
+  };
+
   // Si no está autenticado, mostrar página de login
   if (!isAuthenticated) {
     return (
