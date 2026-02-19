@@ -237,7 +237,7 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
               {filteredEquipment.length === 0 ? (
                 <TableRow>
                   <TableCell
-                    colSpan={7}
+                    colSpan={8}
                     className="text-center py-8 text-muted-foreground"
                   >
                     No se encontraron equipos
