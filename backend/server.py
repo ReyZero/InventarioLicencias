@@ -497,7 +497,7 @@ def calcular_dias_restantes(fecha_vigencia: str) -> int:
 # License endpoints
 @api_router.get("/licenses", response_model=List[License])
 async def get_licenses(current_user: dict = Depends(get_current_user)):
-    licenses = await db.licenses.find({}, {"_id": 0}).to_list(1000)
+    licenses = await db.licenses.find({}, {"_id": 0}).to_list(10000)
     
     # Calcular días restantes para cada licencia
     for license in licenses:
