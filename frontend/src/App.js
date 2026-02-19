@@ -94,12 +94,14 @@ function App() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [equipmentRes, supportRes] = await Promise.all([
+      const [equipmentRes, supportRes, licensesRes] = await Promise.all([
         axios.get(`${API}/equipment`),
         axios.get(`${API}/support`),
+        axios.get(`${API}/licenses`),
       ]);
       setEquipment(equipmentRes.data);
       setSupportHistory(supportRes.data);
+      setLicenses(licensesRes.data);
     } catch (e) {
       console.error("Error fetching data:", e);
       toast.error("Error al cargar los datos");
