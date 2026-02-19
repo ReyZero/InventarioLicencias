@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Trash2, Search, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { Trash2, Search, CheckCircle, Clock, AlertCircle, Edit } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
