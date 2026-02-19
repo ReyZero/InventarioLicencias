@@ -189,12 +189,12 @@ async def get_me(current_user: dict = Depends(get_current_user)):
 
 # Equipment endpoints
 @api_router.get("/equipment", response_model=List[Equipment])
-async def get_equipment():
+async def get_equipment(current_user: dict = Depends(get_current_user)):
     equipment_list = await db.equipment.find({}, {"_id": 0}).to_list(1000)
     return equipment_list
 
 @api_router.post("/equipment", response_model=Equipment)
-async def create_equipment(input: EquipmentCreate):
+async def create_equipment(input: EquipmentCreate, current_user: dict = Depends(get_current_user)):
     # Check if serial number already exists
     existing = await db.equipment.find_one({"numero_serie": input.numero_serie}, {"_id": 0})
     if existing:
