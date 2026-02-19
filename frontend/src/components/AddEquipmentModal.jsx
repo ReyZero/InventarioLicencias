@@ -63,6 +63,7 @@ export const AddEquipmentModal = ({ open, onOpenChange, onSubmit }) => {
       fecha_entrega: "",
       jefatura: "",
       usuario_final: "",
+      area_usuario: "",
       estado: "Activo",
     });
   };
