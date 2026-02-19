@@ -291,9 +291,9 @@ async def create_support_history(input: SupportHistoryCreate, current_user: dict
 # Export to Excel
 @api_router.get("/export")
 async def export_to_excel(current_user: dict = Depends(get_current_user)):
-    # Get all equipment and support history
-    equipment_list = await db.equipment.find({}, {"_id": 0}).to_list(1000)
-    support_list = await db.support_history.find({}, {"_id": 0}).to_list(1000)
+    # Get all equipment and support history (no limit for export)
+    equipment_list = await db.equipment.find({}, {"_id": 0}).to_list(None)
+    support_list = await db.support_history.find({}, {"_id": 0}).to_list(None)
     
     # Create Excel file in memory
     output = BytesIO()
