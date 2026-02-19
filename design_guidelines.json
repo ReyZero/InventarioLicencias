@@ -1,0 +1,175 @@
+{
+  "identity": {
+    "name": "E1 - The Anti-AI Designer",
+    "tone": "Technical, Precision, Organized, Swiss-International",
+    "archetype": "Archetype 4: Swiss & High-Contrast (Authority, Clarity, Truth)",
+    "mission": "Create a high-density, functional inventory dashboard that feels like a precision instrument, not a generic admin panel."
+  },
+  "typography": {
+    "primary_font": "Manrope, sans-serif",
+    "secondary_font": "IBM Plex Sans, monospace",
+    "usage": {
+      "headings": {
+        "font": "Manrope",
+        "weight": "700",
+        "tracking": "-0.02em",
+        "classes": "font-bold tracking-tight text-foreground"
+      },
+      "body": {
+        "font": "IBM Plex Sans",
+        "weight": "400",
+        "classes": "font-normal text-muted-foreground leading-relaxed"
+      },
+      "data_cells": {
+        "font": "IBM Plex Sans",
+        "weight": "500",
+        "classes": "font-medium text-foreground tabular-nums"
+      },
+      "labels": {
+        "font": "Manrope",
+        "weight": "600",
+        "classes": "uppercase tracking-widest text-xs text-muted-foreground"
+      }
+    }
+  },
+  "colors": {
+    "mode": "light",
+    "palette": {
+      "background": "#FFFFFF",
+      "foreground": "#09090B",
+      "card": "#FFFFFF",
+      "card_foreground": "#09090B",
+      "popover": "#FFFFFF",
+      "popover_foreground": "#09090B",
+      "primary": "#2563EB",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#F4F4F5",
+      "secondary_foreground": "#18181B",
+      "muted": "#F4F4F5",
+      "muted_foreground": "#71717A",
+      "accent": "#F4F4F5",
+      "accent_foreground": "#18181B",
+      "destructive": "#EF4444",
+      "destructive_foreground": "#FFFFFF",
+      "border": "#E4E4E7",
+      "input": "#E4E4E7",
+      "ring": "#2563EB"
+    },
+    "status_colors": {
+      "active": { "bg": "#DCFCE7", "text": "#166534" },
+      "repair": { "bg": "#FEF3C7", "text": "#92400E" },
+      "retired": { "bg": "#FEE2E2", "text": "#991B1B" },
+      "warranty_active": { "bg": "#DBEAFE", "text": "#1E40AF" },
+      "warranty_expired": { "bg": "#F3F4F6", "text": "#374151" }
+    }
+  },
+  "layout": {
+    "grid_system": "Bento Grid Mode B (High Density)",
+    "container": "max-w-[1600px] mx-auto p-8",
+    "spacing": {
+      "section_gap": "gap-8",
+      "component_padding": "p-6",
+      "internal_padding": "p-4"
+    },
+    "surface_strategy": "Grid Borders (The Technical Look)",
+    "surface_rules": "Use border-collapse style layouts for data tables. Avoid rounded corners on internal table cells. Use subtle 1px borders."
+  },
+  "components": {
+    "Table": {
+      "style": "swiss_grid",
+      "instructions": "Use a 'border-collapse' look. Headers should have a subtle bottom border. Rows should have hover effects (bg-muted/50). No vertical borders inside the table. Generous cell padding (p-4).",
+      "visuals": "clean, spacious, horizontal emphasis"
+    },
+    "Button": {
+      "style": "technical",
+      "instructions": "Use rounded-md. Primary buttons should be #2563EB with white text. Secondary buttons should be outline or ghost.",
+      "hover": "translate-y-[-1px] transition-transform"
+    },
+    "Card": {
+      "style": "grid_border",
+      "instructions": "Use sharp or slightly rounded (rounded-lg) borders. White background. 1px border #E4E4E7. No shadow by default, shadow-sm on hover."
+    },
+    "Input": {
+      "style": "minimal",
+      "instructions": "bg-white border-input focus:ring-2 focus:ring-primary focus:border-transparent rounded-md"
+    },
+    "Modal": {
+      "style": "clean",
+      "instructions": "Use Dialog component. Backdrop blur-sm. White content box with rounded-lg. Distinct header and footer sections."
+    },
+    "StatusBadge": {
+      "style": "pill",
+      "instructions": "Rounded-full px-2.5 py-0.5 text-xs font-semibold. Use status_colors palette."
+    }
+  },
+  "visual_enhancers": {
+    "grid_borders": "Add a subtle grid background or border pattern to empty spaces to emphasize precision.",
+    "micro_interactions": "All interactive elements must have hover/active states. Buttons should have a slight lift on hover.",
+    "empty_states": "Use technical illustrations or simple geometric shapes for empty states."
+  },
+  "image_urls": {
+    "equipment": [
+      {
+        "name": "Notebook Dell Latitude 5420",
+        "url": "https://images.pexels.com/photos/8534454/pexels-photo-8534454.jpeg",
+        "category": "laptop",
+        "desc": "Minimalist laptop workspace"
+      },
+      {
+        "name": "PC HP EliteDesk 800",
+        "url": "https://images.pexels.com/photos/34190203/pexels-photo-34190203.jpeg",
+        "category": "desktop",
+        "desc": "Desktop tower case"
+      },
+      {
+        "name": "Monitor Samsung 27 Curvo",
+        "url": "https://images.pexels.com/photos/777001/pexels-photo-777001.jpeg",
+        "category": "monitor",
+        "desc": "Computer monitor display"
+      },
+      {
+        "name": "Servidor Dell PowerEdge",
+        "url": "https://images.pexels.com/photos/5092815/pexels-photo-5092815.jpeg",
+        "category": "server",
+        "desc": "Data center server equipment"
+      },
+      {
+        "name": "Impresora HP LaserJet",
+        "url": "https://images.pexels.com/photos/11833899/pexels-photo-11833899.jpeg",
+        "category": "printer",
+        "desc": "Modern office printer"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Use 'Manrope' for all headings and 'IBM Plex Sans' for body text. Add these fonts via Google Fonts.",
+    "Implement the 'Swiss Grid' table style: clean horizontal lines, no vertical lines in body, generous padding.",
+    "Use the provided status colors for the 'Estado' (Status) and 'Garantía' (Warranty) badges.",
+    "Ensure the 'Agregar Equipo' (Add Equipment) and 'Registrar Soporte' (Register Support) forms open in Modals (Dialogs).",
+    "The main view should be the Data Table with Filters on top.",
+    "Detail view should be a separate page or a drawer/sheet that slides in.",
+    "Use Phosphor Icons or Lucide React for icons (e.g., Laptop, Desktop, Printer, User, Calendar).",
+    "Ensure all dates are formatted DD/MM/AAAA.",
+    "Add 'data-testid' to all inputs, buttons, and rows."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": {
+    "design_philosophy": [
+      "Don't make generic centered layouts.",
+      "Create depth through layered design elements (z-index).",
+      "Use glass-morphism effects with backdrop filters where appropriate (e.g., sticky headers).",
+      "Every interaction needs micro-animations (hover, focus, active)."
+    ],
+    "technical_constraints": [
+      "Do NOT use 'transition: all'. Use specific transitions.",
+      "Do NOT center align the app container text.",
+      "Use modern button styles (pill or sharp, not default browser styles).",
+      "NO AI emoji characters."
+    ],
+    "component_usage": [
+      "Prioritize shadcn/ui components.",
+      "Use named exports for components.",
+      "Use default exports for pages.",
+      "Use 'sonner' for toasts."
+    ]
+  }
+}
