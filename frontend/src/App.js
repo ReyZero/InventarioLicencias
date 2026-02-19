@@ -184,6 +184,23 @@ function App() {
     }
   };
 
+  const handleEditLicense = (license) => {
+    setSelectedLicense(license);
+    setIsEditLicenseOpen(true);
+  };
+
+  const handleUpdateLicense = async (id, data) => {
+    try {
+      await axios.put(`${API}/licenses/${id}`, data);
+      toast.success("Licencia actualizada correctamente");
+      fetchData();
+      setIsEditLicenseOpen(false);
+      setSelectedLicense(null);
+    } catch (e) {
+      toast.error(e.response?.data?.detail || "Error al actualizar licencia");
+    }
+  };
+
   // Si no está autenticado, mostrar página de login
   if (!isAuthenticated) {
     return (
