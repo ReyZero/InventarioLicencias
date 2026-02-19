@@ -245,15 +245,16 @@ async def update_equipment(equipment_id: str, input: EquipmentCreate, current_us
 
 @api_router.delete("/equipment/{equipment_id}")
 async def delete_equipment(equipment_id: str, current_user: dict = Depends(get_current_user)):
-    result = await db.equipment.delete_one({"id": equipment_id})
-    
-    if result.deleted_count == 0:
+    # First, get the equipment to find associated support history
+    equipment = await db.equipment.find_one({"id": equipment_id}, {"_id": 0})
+    if not equipment:
         raise HTTPException(status_code=404, detail="Equipo no encontrado")
     
-    # Also delete associated support history
-    equipment = await db.equipment.find_one({"id": equipment_id}, {"_id": 0})
-    if equipment:
-        await db.support_history.delete_many({"numero_serie": equipment['numero_serie']})
+    # Delete the equipment
+    result = await db.equipment.delete_one({"id": equipment_id})
+    
+    # Delete associated support history using the stored numero_serie
+    await db.support_history.delete_many({"numero_serie": equipment['numero_serie']})
     
     return {"message": "Equipo eliminado correctamente"}
 
