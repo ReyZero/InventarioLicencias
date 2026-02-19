@@ -180,7 +180,7 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
             <TableHeader>
               <TableRow className="border-b border-border hover:bg-transparent">
                 <TableHead
-                  className="cursor-pointer font-semibold text-foreground uppercase tracking-widest text-xs"
+                  className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
                   style={{ fontFamily: 'Manrope, sans-serif' }}
                   onClick={() => handleSort("nombre")}
                 >
