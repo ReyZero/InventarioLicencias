@@ -199,10 +199,12 @@ async def seed_data():
     if count > 0:
         return {"message": "Datos ya inicializados"}
     
-    # Sample equipment data
+    import uuid
+    
+    # Sample equipment data with unique UUIDs
     sample_equipment = [
         {
-            "id": "1",
+            "id": str(uuid.uuid4()),
             "nombre": "Notebook Dell Latitude 5420",
             "numero_serie": "ABC123",
             "fecha_entrega": "15/01/2026",
@@ -211,7 +213,7 @@ async def seed_data():
             "estado": "Activo"
         },
         {
-            "id": "2",
+            "id": str(uuid.uuid4()),
             "nombre": "PC HP EliteDesk 800",
             "numero_serie": "DEF456",
             "fecha_entrega": "01/02/2026",
@@ -220,7 +222,7 @@ async def seed_data():
             "estado": "Activo"
         },
         {
-            "id": "3",
+            "id": str(uuid.uuid4()),
             "nombre": "Monitor Samsung 27 Curvo",
             "numero_serie": "GHI789",
             "fecha_entrega": "10/01/2026",
@@ -229,7 +231,7 @@ async def seed_data():
             "estado": "En reparación"
         },
         {
-            "id": "4",
+            "id": str(uuid.uuid4()),
             "nombre": "Servidor Dell PowerEdge R740",
             "numero_serie": "JKL012",
             "fecha_entrega": "05/12/2025",
@@ -238,7 +240,7 @@ async def seed_data():
             "estado": "Activo"
         },
         {
-            "id": "5",
+            "id": str(uuid.uuid4()),
             "nombre": "Impresora HP LaserJet Pro",
             "numero_serie": "MNO345",
             "fecha_entrega": "20/01/2026",
@@ -251,7 +253,7 @@ async def seed_data():
     # Sample support history
     sample_support = [
         {
-            "id": "s1",
+            "id": str(uuid.uuid4()),
             "numero_serie": "GHI789",
             "fecha_envio": "25/01/2026",
             "falla_reportada": "No enciende pantalla",
@@ -259,7 +261,7 @@ async def seed_data():
             "resultado": "En proceso"
         },
         {
-            "id": "s2",
+            "id": str(uuid.uuid4()),
             "numero_serie": "MNO345",
             "fecha_envio": "15/01/2026",
             "falla_reportada": "Atasco de papel constante",
@@ -272,6 +274,13 @@ async def seed_data():
     await db.support_history.insert_many(sample_support)
     
     return {"message": "Datos de ejemplo cargados correctamente"}
+
+# Clean database endpoint (development only)
+@api_router.delete("/reset")
+async def reset_database():
+    await db.equipment.delete_many({})
+    await db.support_history.delete_many({})
+    return {"message": "Base de datos limpiada correctamente"}
 
 # Include the router in the main app
 app.include_router(api_router)
