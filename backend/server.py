@@ -93,6 +93,100 @@ class SupportHistoryCreate(BaseModel):
     estado_garantia: str
     resultado: str
 
+# Helper functions
+def hash_password(password: str) -> str:
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+def verify_password(password: str, hashed: str) -> bool:
+    return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
+
+def create_access_token(data: dict) -> str:
+    to_encode = data.copy()
+    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
+    try:
+        token = credentials.credentials
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise HTTPException(status_code=401, detail="Token inválido")
+        
+        user = await db.users.find_one({"username": username}, {"_id": 0, "password": 0})
+        if user is None:
+            raise HTTPException(status_code=401, detail="Usuario no encontrado")
+        
+        return user
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expirado")
+    except jwt.JWTError:
+        raise HTTPException(status_code=401, detail="Token inválido")
+
+# Auth endpoints
+@api_router.post("/auth/register", response_model=Token)
+async def register(user_data: UserCreate):
+    # Validar longitud de contraseña
+    if len(user_data.password) < 8:
+        raise HTTPException(status_code=400, detail="La contraseña debe tener al menos 8 caracteres")
+    
+    # Verificar si el usuario ya existe
+    existing_user = await db.users.find_one({"username": user_data.username})
+    if existing_user:
+        raise HTTPException(status_code=400, detail="El nombre de usuario ya está en uso")
+    
+    # Crear nuevo usuario
+    import uuid
+    user_id = str(uuid.uuid4())
+    hashed_password = hash_password(user_data.password)
+    
+    new_user = {
+        "id": user_id,
+        "username": user_data.username,
+        "password": hashed_password,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.users.insert_one(new_user)
+    
+    # Crear token
+    access_token = create_access_token(data={"sub": user_data.username})
+    
+    user_response = User(
+        id=user_id,
+        username=user_data.username,
+        created_at=new_user["created_at"]
+    )
+    
+    return Token(access_token=access_token, token_type="bearer", user=user_response)
+
+@api_router.post("/auth/login", response_model=Token)
+async def login(user_data: UserLogin):
+    # Buscar usuario
+    user = await db.users.find_one({"username": user_data.username})
+    if not user:
+        raise HTTPException(status_code=401, detail="Usuario o contraseña incorrectos")
+    
+    # Verificar contraseña
+    if not verify_password(user_data.password, user["password"]):
+        raise HTTPException(status_code=401, detail="Usuario o contraseña incorrectos")
+    
+    # Crear token
+    access_token = create_access_token(data={"sub": user_data.username})
+    
+    user_response = User(
+        id=user["id"],
+        username=user["username"],
+        created_at=user["created_at"]
+    )
+    
+    return Token(access_token=access_token, token_type="bearer", user=user_response)
+
+@api_router.get("/auth/me", response_model=User)
+async def get_me(current_user: dict = Depends(get_current_user)):
+    return User(**current_user)
+
 # Equipment endpoints
 @api_router.get("/equipment", response_model=List[Equipment])
 async def get_equipment():
