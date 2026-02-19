@@ -29,7 +29,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-export const LicenseTable = ({ licenses, onDelete }) => {
+export const LicenseTable = ({ licenses, onDelete, onEdit }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterEstado, setFilterEstado] = useState("all");
   const [filterArea, setFilterArea] = useState("all");
