@@ -78,11 +78,17 @@ export const EquipmentDetailModal = ({ open, onOpenChange, equipment, supportHis
               </p>
               <p className="font-medium">{equipment.jefatura}</p>
             </div>
-            <div className="space-y-1 col-span-2">
+            <div className="space-y-1">
               <p className="text-xs uppercase tracking-widest text-muted-foreground flex items-center gap-1" style={{ fontFamily: 'Manrope, sans-serif' }}>
                 <User className="h-3 w-3" /> Usuario Final
               </p>
               <p className="font-medium">{equipment.usuario_final}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                Área Usuario
+              </p>
+              <p className="font-medium">{equipment.area_usuario}</p>
             </div>
           </div>
 
