@@ -44,7 +44,8 @@ export const AddEquipmentModal = ({ open, onOpenChange, onSubmit }) => {
       !formData.numero_serie ||
       !formData.fecha_entrega ||
       !formData.jefatura ||
-      !formData.usuario_final
+      !formData.usuario_final ||
+      !formData.area_usuario
     ) {
       toast.error("Todos los campos son obligatorios");
       return;
