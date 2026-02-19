@@ -257,6 +257,14 @@ async def create_support_history(input: SupportHistoryCreate, current_user: dict
     support_dict['id'] = str(uuid.uuid4())
     
     await db.support_history.insert_one(support_dict)
+    
+    # Si el resultado es "Reparado", actualizar el estado del equipo a "Activo"
+    if input.resultado == "Reparado":
+        await db.equipment.update_one(
+            {"numero_serie": input.numero_serie},
+            {"$set": {"estado": "Activo"}}
+        )
+    
     return SupportHistory(**support_dict)
 
 # Export to Excel
