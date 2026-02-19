@@ -114,7 +114,7 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
 
   return (
     <>
-      <div className="bg-white border border-border rounded-lg p-6 mb-6">
+      <div className="bg-card border border-border rounded-lg p-6 mb-6">
         {/* Filters */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="lg:col-span-2">
