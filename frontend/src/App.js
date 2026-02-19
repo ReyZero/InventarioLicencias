@@ -5,12 +5,35 @@ import axios from "axios";
 import EquipmentTable from "@/components/EquipmentTable";
 import AddEquipmentModal from "@/components/AddEquipmentModal";
 import AddSupportModal from "@/components/AddSupportModal";
+import AuthPage from "@/components/AuthPage";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Plus, Download, Wrench } from "lucide-react";
+import { Plus, Download, Wrench, LogOut } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// Configurar axios para incluir el token en todas las peticiones
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Manejar errores de autenticación
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.reload();
+    }
+    return Promise.reject(error);
+  }
+);
 
 function App() {
   const [equipment, setEquipment] = useState([]);
@@ -19,11 +42,41 @@ function App() {
   const [isAddSupportOpen, setIsAddSupportOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedEquipment, setSelectedEquipment] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = () => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    
+    if (token && user) {
+      setIsAuthenticated(true);
+      setCurrentUser(JSON.parse(user));
+      fetchData();
+      seedDataIfNeeded();
+    } else {
+      setLoading(false);
+    }
+  };
+
+  const handleLoginSuccess = (data) => {
+    setIsAuthenticated(true);
+    setCurrentUser(data.user);
     fetchData();
     seedDataIfNeeded();
-  }, []);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+    toast.success("Sesión cerrada correctamente");
+  };
 
   const seedDataIfNeeded = async () => {
     try {
@@ -100,17 +153,45 @@ function App() {
     }
   };
 
+  // Si no está autenticado, mostrar página de login
+  if (!isAuthenticated) {
+    return (
+      <>
+        <AuthPage onLoginSuccess={handleLoginSuccess} />
+        <Toaster position="top-right" />
+      </>
+    );
+  }
+
   return (
     <div className="App min-h-screen bg-background">
       <div className="max-w-[1600px] mx-auto p-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2" style={{ fontFamily: 'Manrope, sans-serif' }}>
-            Inventario de Equipos TI
-          </h1>
-          <p className="text-muted-foreground" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
-            Altonorte - Sistema de gestión de equipos tecnológicos
-          </p>
+        <div className="mb-8 flex justify-between items-start">
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2" style={{ fontFamily: 'Manrope, sans-serif' }}>
+              Inventario de Equipos TI
+            </h1>
+            <p className="text-muted-foreground" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
+              Altonorte - Sistema de gestión de equipos tecnológicos
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <p className="text-sm text-muted-foreground">Usuario</p>
+              <p className="font-medium text-foreground">{currentUser?.username}</p>
+            </div>
+            <Button
+              data-testid="logout-btn"
+              onClick={handleLogout}
+              variant="outline"
+              size="sm"
+              className="transition-transform hover:translate-y-[-1px]"
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              Cerrar Sesión
+            </Button>
+          </div>
         </div>
 
         {/* Action Buttons */}
