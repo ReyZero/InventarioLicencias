@@ -40,12 +40,15 @@ axios.interceptors.response.use(
 function App() {
   const [equipment, setEquipment] = useState([]);
   const [supportHistory, setSupportHistory] = useState([]);
+  const [licenses, setLicenses] = useState([]);
   const [isAddEquipmentOpen, setIsAddEquipmentOpen] = useState(false);
   const [isAddSupportOpen, setIsAddSupportOpen] = useState(false);
+  const [isAddLicenseOpen, setIsAddLicenseOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedEquipment, setSelectedEquipment] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [activeTab, setActiveTab] = useState("equipos"); // "equipos" | "licencias"
 
   useEffect(() => {
     checkAuth();
