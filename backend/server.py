@@ -209,7 +209,7 @@ async def create_equipment(input: EquipmentCreate, current_user: dict = Depends(
     return Equipment(**equipment_dict)
 
 @api_router.put("/equipment/{equipment_id}", response_model=Equipment)
-async def update_equipment(equipment_id: str, input: EquipmentCreate):
+async def update_equipment(equipment_id: str, input: EquipmentCreate, current_user: dict = Depends(get_current_user)):
     equipment_dict = input.model_dump()
     equipment_dict['id'] = equipment_id
     
