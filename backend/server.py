@@ -434,6 +434,70 @@ async def reset_database():
     await db.support_history.delete_many({})
     return {"message": "Base de datos limpiada correctamente"}
 
+# Helper function to calculate remaining days
+def calcular_dias_restantes(fecha_vigencia: str) -> int:
+    from datetime import datetime
+    try:
+        # Parse DD/MM/AAAA
+        day, month, year = fecha_vigencia.split('/')
+        fecha_venc = datetime(int(year), int(month), int(day))
+        hoy = datetime.now()
+        delta = fecha_venc - hoy
+        return delta.days
+    except:
+        return 0
+
+# License endpoints
+@api_router.get("/licenses", response_model=List[License])
+async def get_licenses(current_user: dict = Depends(get_current_user)):
+    licenses = await db.licenses.find({}, {"_id": 0}).to_list(1000)
+    
+    # Calcular días restantes para cada licencia
+    for license in licenses:
+        license['dias_restantes'] = calcular_dias_restantes(license['vigencia'])
+    
+    return licenses
+
+@api_router.post("/licenses", response_model=License)
+async def create_license(input: LicenseCreate, current_user: dict = Depends(get_current_user)):
+    # Check if license code already exists
+    existing = await db.licenses.find_one({"codigo_licencia": input.codigo_licencia}, {"_id": 0})
+    if existing:
+        raise HTTPException(status_code=400, detail="El código de licencia ya existe")
+    
+    import uuid
+    license_dict = input.model_dump()
+    license_dict['id'] = str(uuid.uuid4())
+    license_dict['dias_restantes'] = calcular_dias_restantes(input.vigencia)
+    
+    await db.licenses.insert_one(license_dict)
+    return License(**license_dict)
+
+@api_router.put("/licenses/{license_id}", response_model=License)
+async def update_license(license_id: str, input: LicenseCreate, current_user: dict = Depends(get_current_user)):
+    license_dict = input.model_dump()
+    license_dict['id'] = license_id
+    license_dict['dias_restantes'] = calcular_dias_restantes(input.vigencia)
+    
+    result = await db.licenses.update_one(
+        {"id": license_id},
+        {"$set": license_dict}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Licencia no encontrada")
+    
+    return License(**license_dict)
+
+@api_router.delete("/licenses/{license_id}")
+async def delete_license(license_id: str, current_user: dict = Depends(get_current_user)):
+    result = await db.licenses.delete_one({"id": license_id})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Licencia no encontrada")
+    
+    return {"message": "Licencia eliminada correctamente"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
