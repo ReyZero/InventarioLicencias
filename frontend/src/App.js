@@ -45,6 +45,8 @@ function App() {
   const [isAddEquipmentOpen, setIsAddEquipmentOpen] = useState(false);
   const [isAddSupportOpen, setIsAddSupportOpen] = useState(false);
   const [isAddLicenseOpen, setIsAddLicenseOpen] = useState(false);
+  const [isEditLicenseOpen, setIsEditLicenseOpen] = useState(false);
+  const [selectedLicense, setSelectedLicense] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedEquipment, setSelectedEquipment] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
