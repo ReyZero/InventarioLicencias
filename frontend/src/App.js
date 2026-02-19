@@ -222,47 +222,100 @@ function App() {
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-3 mb-6">
+        {/* Navigation Tabs */}
+        <div className="flex gap-2 mb-6">
           <Button
-            data-testid="add-equipment-btn"
-            onClick={() => setIsAddEquipmentOpen(true)}
-            className="bg-primary hover:bg-primary/90 transition-transform hover:translate-y-[-1px]"
+            data-testid="tab-equipos"
+            onClick={() => setActiveTab("equipos")}
+            variant={activeTab === "equipos" ? "default" : "outline"}
+            className={activeTab === "equipos" ? "bg-primary" : ""}
           >
-            <Plus className="mr-2 h-4 w-4" />
-            Agregar Equipo
+            <Package className="mr-2 h-4 w-4" />
+            Equipos
           </Button>
           <Button
-            data-testid="register-support-btn"
-            onClick={() => setIsAddSupportOpen(true)}
-            variant="outline"
-            className="transition-transform hover:translate-y-[-1px]"
+            data-testid="tab-licencias"
+            onClick={() => setActiveTab("licencias")}
+            variant={activeTab === "licencias" ? "default" : "outline"}
+            className={activeTab === "licencias" ? "bg-primary" : ""}
           >
-            <Wrench className="mr-2 h-4 w-4" />
-            Registrar Soporte
-          </Button>
-          <Button
-            data-testid="export-excel-btn"
-            onClick={handleExport}
-            variant="outline"
-            className="ml-auto transition-transform hover:translate-y-[-1px]"
-          >
-            <Download className="mr-2 h-4 w-4" />
-            Exportar a Excel
+            <Key className="mr-2 h-4 w-4" />
+            Licencias
           </Button>
         </div>
 
-        {/* Equipment Table */}
-        {loading ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Cargando datos...</p>
-          </div>
+        {/* Content based on active tab */}
+        {activeTab === "equipos" ? (
+          <>
+            {/* Action Buttons */}
+            <div className="flex gap-3 mb-6">
+              <Button
+                data-testid="add-equipment-btn"
+                onClick={() => setIsAddEquipmentOpen(true)}
+                className="bg-primary hover:bg-primary/90 transition-transform hover:translate-y-[-1px]"
+              >
+                <Plus className="mr-2 h-4 w-4" />
+                Agregar Equipo
+              </Button>
+              <Button
+                data-testid="register-support-btn"
+                onClick={() => setIsAddSupportOpen(true)}
+                variant="outline"
+                className="transition-transform hover:translate-y-[-1px]"
+              >
+                <Wrench className="mr-2 h-4 w-4" />
+                Registrar Soporte
+              </Button>
+              <Button
+                data-testid="export-excel-btn"
+                onClick={handleExport}
+                variant="outline"
+                className="ml-auto transition-transform hover:translate-y-[-1px]"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Exportar a Excel
+              </Button>
+            </div>
+
+            {/* Equipment Table */}
+            {loading ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">Cargando datos...</p>
+              </div>
+            ) : (
+              <EquipmentTable
+                equipment={equipment}
+                supportHistory={supportHistory}
+                onDelete={handleDeleteEquipment}
+              />
+            )}
+          </>
         ) : (
-          <EquipmentTable
-            equipment={equipment}
-            supportHistory={supportHistory}
-            onDelete={handleDeleteEquipment}
-          />
+          <>
+            {/* License Action Buttons */}
+            <div className="flex gap-3 mb-6">
+              <Button
+                data-testid="add-license-btn"
+                onClick={() => setIsAddLicenseOpen(true)}
+                className="bg-primary hover:bg-primary/90 transition-transform hover:translate-y-[-1px]"
+              >
+                <Plus className="mr-2 h-4 w-4" />
+                Agregar Licencia
+              </Button>
+            </div>
+
+            {/* License Table */}
+            {loading ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">Cargando datos...</p>
+              </div>
+            ) : (
+              <LicenseTable
+                licenses={licenses}
+                onDelete={handleDeleteLicense}
+              />
+            )}
+          </>
         )}
       </div>
 
@@ -277,6 +330,11 @@ function App() {
         onOpenChange={setIsAddSupportOpen}
         onSubmit={handleAddSupport}
         equipment={equipment}
+      />
+      <AddLicenseModal
+        open={isAddLicenseOpen}
+        onOpenChange={setIsAddLicenseOpen}
+        onSubmit={handleAddLicense}
       />
 
       <Toaster position="top-right" />
