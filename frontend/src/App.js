@@ -7,6 +7,7 @@ import AddEquipmentModal from "@/components/AddEquipmentModal";
 import AddSupportModal from "@/components/AddSupportModal";
 import LicenseTable from "@/components/LicenseTable";
 import AddLicenseModal from "@/components/AddLicenseModal";
+import EditLicenseModal from "@/components/EditLicenseModal";
 import AuthPage from "@/components/AuthPage";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
