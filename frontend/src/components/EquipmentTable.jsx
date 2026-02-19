@@ -266,6 +266,9 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
                     <TableCell className="p-4" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
                       {item.usuario_final}
                     </TableCell>
+                    <TableCell className="p-4" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
+                      {item.area_usuario}
+                    </TableCell>
                     <TableCell className="p-4">
                       <Badge
                         data-testid={`status-badge-${item.numero_serie}`}
