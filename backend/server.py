@@ -365,6 +365,7 @@ async def seed_data():
             "fecha_entrega": "15/01/2026",
             "jefatura": "Juan Pérez",
             "usuario_final": "María Gómez",
+            "area_usuario": "Administración",
             "estado": "Activo"
         },
         {
@@ -374,6 +375,7 @@ async def seed_data():
             "fecha_entrega": "01/02/2026",
             "jefatura": "Carlos López",
             "usuario_final": "Pedro Ruiz",
+            "area_usuario": "Ingeniería",
             "estado": "Activo"
         },
         {
@@ -383,6 +385,7 @@ async def seed_data():
             "fecha_entrega": "10/01/2026",
             "jefatura": "Ana Martínez",
             "usuario_final": "Luis Torres",
+            "area_usuario": "Marketing",
             "estado": "En reparación"
         },
         {
@@ -392,6 +395,7 @@ async def seed_data():
             "fecha_entrega": "05/12/2025",
             "jefatura": "Roberto Silva",
             "usuario_final": "Equipo IT",
+            "area_usuario": "TI",
             "estado": "Activo"
         },
         {
@@ -401,6 +405,7 @@ async def seed_data():
             "fecha_entrega": "20/01/2026",
             "jefatura": "Patricia Fernández",
             "usuario_final": "Administración",
+            "area_usuario": "Administración",
             "estado": "Dado de baja"
         }
     ]
