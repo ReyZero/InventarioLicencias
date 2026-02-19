@@ -5,10 +5,12 @@ import axios from "axios";
 import EquipmentTable from "@/components/EquipmentTable";
 import AddEquipmentModal from "@/components/AddEquipmentModal";
 import AddSupportModal from "@/components/AddSupportModal";
+import LicenseTable from "@/components/LicenseTable";
+import AddLicenseModal from "@/components/AddLicenseModal";
 import AuthPage from "@/components/AuthPage";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Plus, Download, Wrench, LogOut } from "lucide-react";
+import { Plus, Download, Wrench, LogOut, Package, Key } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
