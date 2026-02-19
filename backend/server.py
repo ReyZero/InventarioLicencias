@@ -224,7 +224,7 @@ async def update_equipment(equipment_id: str, input: EquipmentCreate, current_us
     return Equipment(**equipment_dict)
 
 @api_router.delete("/equipment/{equipment_id}")
-async def delete_equipment(equipment_id: str):
+async def delete_equipment(equipment_id: str, current_user: dict = Depends(get_current_user)):
     result = await db.equipment.delete_one({"id": equipment_id})
     
     if result.deleted_count == 0:
