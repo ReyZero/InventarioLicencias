@@ -241,16 +241,16 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
                   <TableRow
                     key={item.id}
                     data-testid={`equipment-row-${item.numero_serie}`}
-                    className="hover:bg-muted/50 transition-colors cursor-pointer"
+                    className="hover:bg-accent/50 transition-colors cursor-pointer border-b border-border"
                     onClick={() => setSelectedEquipmentId(item.id)}
                   >
-                    <TableCell className="p-4 font-medium" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
+                    <TableCell className="p-4 font-medium text-foreground" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
                       {item.nombre}
                     </TableCell>
-                    <TableCell className="p-4 font-mono text-sm" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
+                    <TableCell className="p-4 font-mono text-sm text-foreground" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
                       {item.numero_serie}
                     </TableCell>
-                    <TableCell className="p-4 tabular-nums" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
+                    <TableCell className="p-4 tabular-nums text-foreground" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
                       {item.fecha_entrega}
                     </TableCell>
                     <TableCell className="p-4" style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}>
