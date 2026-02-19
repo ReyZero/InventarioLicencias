@@ -210,7 +210,7 @@ async def get_me(current_user: dict = Depends(get_current_user)):
 # Equipment endpoints
 @api_router.get("/equipment", response_model=List[Equipment])
 async def get_equipment(current_user: dict = Depends(get_current_user)):
-    equipment_list = await db.equipment.find({}, {"_id": 0}).to_list(1000)
+    equipment_list = await db.equipment.find({}, {"_id": 0}).to_list(10000)
     return equipment_list
 
 @api_router.post("/equipment", response_model=Equipment)
