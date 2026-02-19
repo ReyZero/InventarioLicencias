@@ -217,6 +217,13 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
                 <TableHead
                   className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
                   style={{ fontFamily: 'Manrope, sans-serif' }}
+                  onClick={() => handleSort("area_usuario")}
+                >
+                  Área {sortField === "area_usuario" && (sortDirection === "asc" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
+                  style={{ fontFamily: 'Manrope, sans-serif' }}
                   onClick={() => handleSort("estado")}
                 >
                   Estado {sortField === "estado" && (sortDirection === "asc" ? "↑" : "↓")}
