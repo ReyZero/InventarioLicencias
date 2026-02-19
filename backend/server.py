@@ -425,6 +425,52 @@ async def seed_data():
     await db.equipment.insert_many(sample_equipment)
     await db.support_history.insert_many(sample_support)
     
+    # Sample licenses
+    sample_licenses = [
+        {
+            "id": str(uuid.uuid4()),
+            "nombre_licencia": "Microsoft Office 365 Business",
+            "codigo_licencia": "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX",
+            "estado": "Instalada",
+            "usuario_final": "María Gómez",
+            "area_usuario": "Administración",
+            "vigencia": "15/12/2026",
+            "dias_restantes": calcular_dias_restantes("15/12/2026")
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "nombre_licencia": "AutoCAD 2024",
+            "codigo_licencia": "ABCDE-12345-FGHIJ-67890",
+            "estado": "Instalada",
+            "usuario_final": "Pedro Ruiz",
+            "area_usuario": "Ingeniería",
+            "vigencia": "01/03/2026",
+            "dias_restantes": calcular_dias_restantes("01/03/2026")
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "nombre_licencia": "Windows 11 Pro",
+            "codigo_licencia": "WIN11-PRO-2024-KEY",
+            "estado": "Disponible",
+            "usuario_final": None,
+            "area_usuario": None,
+            "vigencia": "31/12/2027",
+            "dias_restantes": calcular_dias_restantes("31/12/2027")
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "nombre_licencia": "Adobe Creative Cloud",
+            "codigo_licencia": "ADOBE-CC-2024-LIC",
+            "estado": "Reasignada",
+            "usuario_final": "Luis Torres",
+            "area_usuario": "Marketing",
+            "vigencia": "28/02/2026",
+            "dias_restantes": calcular_dias_restantes("28/02/2026")
+        }
+    ]
+    
+    await db.licenses.insert_many(sample_licenses)
+    
     return {"message": "Datos de ejemplo cargados correctamente"}
 
 # Clean database endpoint (development only)
