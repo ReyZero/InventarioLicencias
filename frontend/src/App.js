@@ -333,6 +333,7 @@ function App() {
               <LicenseTable
                 licenses={licenses}
                 onDelete={handleDeleteLicense}
+                onEdit={handleEditLicense}
               />
             )}
           </>
