@@ -187,41 +187,41 @@ export const EquipmentTable = ({ equipment, supportHistory, onDelete }) => {
                   Nombre del Equipo {sortField === "nombre" && (sortDirection === "asc" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  className="cursor-pointer font-semibold text-foreground uppercase tracking-widest text-xs"
+                  className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
                   style={{ fontFamily: 'Manrope, sans-serif' }}
                   onClick={() => handleSort("numero_serie")}
                 >
                   N° de Serie {sortField === "numero_serie" && (sortDirection === "asc" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  className="cursor-pointer font-semibold text-foreground uppercase tracking-widest text-xs"
+                  className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
                   style={{ fontFamily: 'Manrope, sans-serif' }}
                   onClick={() => handleSort("fecha_entrega")}
                 >
                   Fecha Entrega {sortField === "fecha_entrega" && (sortDirection === "asc" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  className="cursor-pointer font-semibold text-foreground uppercase tracking-widest text-xs"
+                  className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
                   style={{ fontFamily: 'Manrope, sans-serif' }}
                   onClick={() => handleSort("jefatura")}
                 >
                   Jefatura {sortField === "jefatura" && (sortDirection === "asc" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  className="cursor-pointer font-semibold text-foreground uppercase tracking-widest text-xs"
+                  className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
                   style={{ fontFamily: 'Manrope, sans-serif' }}
                   onClick={() => handleSort("usuario_final")}
                 >
                   Usuario Final {sortField === "usuario_final" && (sortDirection === "asc" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  className="cursor-pointer font-semibold text-foreground uppercase tracking-widest text-xs"
+                  className="cursor-pointer font-semibold text-muted-foreground uppercase tracking-widest text-xs"
                   style={{ fontFamily: 'Manrope, sans-serif' }}
                   onClick={() => handleSort("estado")}
                 >
                   Estado {sortField === "estado" && (sortDirection === "asc" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="font-semibold text-foreground uppercase tracking-widest text-xs" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <TableHead className="font-semibold text-muted-foreground uppercase tracking-widest text-xs" style={{ fontFamily: 'Manrope, sans-serif' }}>
                   Acciones
                 </TableHead>
               </TableRow>
