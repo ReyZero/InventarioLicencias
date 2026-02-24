@@ -1,0 +1,62 @@
+═══════════════════════════════════════════════════
+  INICIO RÁPIDO - Inventario Altonorte
+═══════════════════════════════════════════════════
+
+🚀 PASOS PARA EJECUTAR EN VSCODE:
+
+1. Abrir el proyecto:
+   - Abrir VSCode
+   - File → Open Folder → Seleccionar "inventario-altonorte"
+
+2. Instalar extensiones (VSCode te las sugerirá):
+   - Python
+   - ES7+ React snippets
+   - Tailwind CSS IntelliSense
+
+3. Configurar .env:
+   Backend:  cd backend && cp .env.example .env
+   Frontend: cd frontend && cp .env.example .env
+
+4. Instalar dependencias:
+   Backend:  cd backend && pip install -r requirements.txt
+   Frontend: cd frontend && yarn install
+
+5. Iniciar MongoDB:
+   Windows: net start MongoDB
+   Mac:     brew services start mongodb-community
+   Linux:   sudo systemctl start mongod
+
+6. Ejecutar aplicación:
+   OPCIÓN FÁCIL (VSCode):
+   - Ctrl+Shift+P → "Tasks: Run Task" → "🚀 Iniciar Todo"
+
+   OPCIÓN MANUAL:
+   Terminal 1: cd backend && python -m uvicorn server:app --reload
+   Terminal 2: cd frontend && yarn start
+
+7. Abrir navegador:
+   http://localhost:3000
+
+8. Crear tu cuenta:
+   - Click en "¿No tienes cuenta? Créala aquí"
+   - Usuario: el que quieras (sin @)
+   - Contraseña: mínimo 8 caracteres
+
+¡Listo! Ya puedes usar el sistema.
+
+═══════════════════════════════════════════════════
+URLs IMPORTANTES:
+═══════════════════════════════════════════════════
+Frontend:  http://localhost:3000
+Backend:   http://localhost:8001
+API Docs:  http://localhost:8001/docs
+
+═══════════════════════════════════════════════════
+ATAJOS DE TECLADO EN VSCODE:
+═══════════════════════════════════════════════════
+Ctrl+Shift+P   → Abrir comandos
+Ctrl+`         → Abrir terminal
+Ctrl+B         → Mostrar/Ocultar sidebar
+F5             → Iniciar debugging
+
+═══════════════════════════════════════════════════
