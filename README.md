@@ -4,8 +4,8 @@
 
 Tu proyecto está empaquetado en 2 formatos:
 
-1. **inventario-altonorte.zip** (90KB) ← Recomendado para Windows/Mac
-2. **inventario-altonorte.tar.gz** (50KB) ← Para Linux
+1. **inventario-.zip** (90KB) ← Recomendado para Windows/Mac
+2. **inventario-.tar.gz** (50KB) ← Para Linux
 
 ## 🔽 Pasos para Descargar
 
@@ -19,8 +19,8 @@ Tu proyecto está empaquetado en 2 formatos:
 
 ```bash
 # Los archivos están aquí:
-/app/inventario-altonorte.zip
-/app/inventario-altonorte.tar.gz
+/app/inventario.zip
+/app/inventario.tar.gz
 ```
 
 ## 📂 Después de Descargar
@@ -29,31 +29,31 @@ Tu proyecto está empaquetado en 2 formatos:
 
 **Windows:**
 ```
-- Click derecho en inventario-altonorte.zip
+- Click derecho en inventario-.zip
 - Selecciona "Extraer todo..."
 - Elige la ubicación
 ```
 
 **Mac:**
 ```bash
-unzip inventario-altonorte.zip
-cd inventario-altonorte
+unzip inventario-.zip
+cd inventario-
 ```
 
 **Linux:**
 ```bash
-tar -xzf inventario-altonorte.tar.gz
-cd inventario-altonorte
+tar -xzf inventario-.tar.gz
+cd inventario-
 ```
 
 ### 2. Abrir en VSCode
 
 ```bash
 # Desde la terminal
-code inventario-altonorte
+code inventario
 
 # O desde VSCode:
-# File → Open Folder → Seleccionar "inventario-altonorte"
+# File → Open Folder → Seleccionar "inventario-"
 ```
 
 ### 3. Instalar Prerrequisitos
